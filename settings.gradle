@@ -1,0 +1,3 @@
+include ':SimplifiedSqlite'
+include ':app'
+rootProject.name = "Simplified sqlite"
