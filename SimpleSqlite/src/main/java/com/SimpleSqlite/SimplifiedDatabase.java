@@ -14,7 +14,7 @@ import com.SimpleSqlite.modelClasses.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Database extends SQLiteOpenHelper {
+public class SimplifiedDatabase extends SQLiteOpenHelper {
 
 
     private String TABLE_NAME = "MYT";
@@ -24,7 +24,7 @@ public class Database extends SQLiteOpenHelper {
 
 
 
-    public Database(Context context, String databaseName) {
+    public SimplifiedDatabase(Context context, String databaseName) {
         super(context, databaseName, null, 1);
         DATABASE_NAME = databaseName;
 
