@@ -114,17 +114,70 @@ public class Database extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getReadableDatabase();
 
+
+
+
         Cursor  cursor = db.rawQuery("select * from "+tableName,null);
         String[] columns = cursor.getColumnNames();
-        int indexCount = cursor.getColumnCount();
-        for (int i = 1; i <= indexCount; i++) {
-            HashMap map = new HashMap();
-            for (int j = 0; j < columns.length; j++) {
-                map.put(columns[j],cursor.getString(j));
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+               HashMap map = new HashMap();
+                for (int i = 0; i < columns.length; i++) {
+                    map.put(columns[i],cursor.getString(cursor.getColumnIndex(columns[i])));
+                }
+                arrayList.add(map);
+                cursor.moveToNext();
+
             }
-           arrayList.add(map);
         }
 
         return arrayList;
+    }
+    public void updateColumnWithId(String tableName,String id,String rowName,String updateValue){
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues data=new ContentValues();
+        data.put(rowName,updateValue);
+
+        DB.update(tableName, data, "ID="+id+"", null);
+    }
+
+
+    public void updateStringValueColumnWithRowName(String tableName,String oldValueOfRow,String rowName,String updateValue){
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues data=new ContentValues();
+        data.put(rowName,updateValue);
+
+        DB.update(tableName, data, "ID="+getId(tableName,rowName,oldValueOfRow)+"", null);
+    }
+
+    public void updateIntegerValueColumnWithRowName(String tableName, int oldValueOfRow, String rowName, int updateValue){
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues data=new ContentValues();
+        data.put(rowName,updateValue);
+
+        DB.update(tableName, data, "ID="+getId(tableName,rowName, String.valueOf(oldValueOfRow))+"", null);
+    }
+
+    private int getId(String tableName,String rowName,String rowValue) {
+        int  position = 1293829132;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        try {
+            Cursor  cursor = db.rawQuery("select * from "+tableName,null);
+            if (cursor.moveToFirst()) {
+                while (!cursor.isAfterLast()) {
+                    String newRowValue = cursor.getString(cursor.getColumnIndex(rowName));
+
+                    if (newRowValue.equals(rowValue)){
+                        position = cursor.getPosition()+1;
+                    }
+                    cursor.moveToNext();
+                }
+            }
+        }catch (Exception e){
+            return position;
+        }
+
+        return position;
     }
 }
