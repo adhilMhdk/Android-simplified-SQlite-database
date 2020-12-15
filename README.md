@@ -39,9 +39,50 @@ Create an object for SimplifiedDatabase
 Create an arrayList of Row models
 
     ArrayList<TableRowModel> arrayList = new ArrayList<>();
-    arrayList.add(new TableRowModel("NAME OF ROW",  new Types().getString())); //TYPE OF ROW
+    
+In the new TableRowModel, the first parameter is name of row and second is row type
+
+    arrayList.add(new TableRowModel("NAME_OF_ROW",  new Types().getString())); 
+    
 Finally call this method to create table
     
     database.createTable(TABLE_NAME,arrayList);
+
+Example to insert data
+----------------------------------------------
+
+	private static final String DATABASE_NAME = "DATABASE_NAME";
+	private static final String TABLE_NAME = "TABLE_NAME";
+	
+Create an object for SimplifiedDatabase
+
+	SimplifiedDatabase database = new SimplifiedDatabase(this,DATABASE_NAME);
+	
+Create an arrayList of Insert data
+
+	ArrayList<InsertData> arrayList = new ArrayList<>();
+	
+Create an object for InsertData and set the values
+
+
+	InsertData insertData = new InsertData();
+	insertData.setName("COLUMN_NAME");
+	//If your value is string
+	insertData.setStringValue("YOUR STRING VALUE");
+	//ELSE
+	insertData.setIntegerValue(0);  //YOUR INTEGER VALUE AND LEAVE setStringValue EMPTY
+	
+	//Add the insertdata into the arraylist
+	arrayList.add(insertData)
+Finally, This method insert data into your table
+	
+	database.insertData(TABLE_NAME,arrayList);
+
+
+
+
+	
+	
+	
 
     
