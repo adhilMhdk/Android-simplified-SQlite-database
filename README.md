@@ -112,6 +112,19 @@ Call this method to query all data in table
 	ArrayList<HashMap> map = database.queryAllItemsInTable(TABLE_NAME);
 	for (int i = 0; i < maps.size(); i++) {
             HashMap map = maps.get(i);
-            Toast.makeText(this, map.get("COLUMN_NAME").toString(), Toast.LENGTH_SHORT).show();
-	    Toast.makeText(this, map.get("COLUMN_NAME_B").toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, map.get("ROW_NAME").toString(), Toast.LENGTH_SHORT).show();
+	    Toast.makeText(this, map.get("ROW_NAME_B").toString(), Toast.LENGTH_SHORT).show();
         }
+	
+Update table with id
+---------------------
+
+Create an object for SimplifiedDatabase
+
+	SimplifiedDatabase database = new SimplifiedDatabase(this,DATABASE_NAME);
+	
+Call this method to update column.
+
+The first parameter is table name, second is id, third one is row name and the last one is the update value
+
+	database.updateColumnWithId(TABLE_NAME,"id","ROW_NAME","UPDATE_VALUE");
