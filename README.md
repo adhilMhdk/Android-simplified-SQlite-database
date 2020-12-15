@@ -2,6 +2,7 @@
 This is a simplified android SQlite database library project
 
 To use it:
+-----
 
 Add it in your root build.gradle at the end of repositories:
 
