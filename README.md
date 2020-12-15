@@ -90,7 +90,17 @@ Call this method with table name as the parameter
 	database.clearTable(TABLE_NAME);
 
 
-	
+Get column with Column id
+-----------------------------
+
+Create an object for SimplifiedDatabase
+
+	SimplifiedDatabase database= new SimplifiedDatabase(this,DATABASE_NAME);
+Call this method with first parameter as id and second as table name
+
+        HashMap map = database.getColumnWithId("1",TABLE_NAME);
+	String name = map.get("COLUMN_NAME").toString();
+
 	
 	
 
