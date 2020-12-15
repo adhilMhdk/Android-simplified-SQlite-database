@@ -79,6 +79,15 @@ Finally, This method insert data into your table
 	database.insertData(TABLE_NAME,arrayList);
 
 
+Clear a table
+-------------
+
+Create an object for SimplifiedDatabase
+
+	SimplifiedDatabase database= new SimplifiedDatabase(this,DATABASE_NAME);
+Call this method with table name as the parameter
+
+	database.clearTable(TABLE_NAME);
 
 
 	
