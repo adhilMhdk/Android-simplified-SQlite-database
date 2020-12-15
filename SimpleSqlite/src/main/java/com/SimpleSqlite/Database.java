@@ -1,4 +1,5 @@
-package com.example.simplifiedsqlite;
+package com.SimpleSqlite;
+
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,14 +8,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import androidx.annotation.Nullable;
-
-import com.example.simplifiedsqlite.modelClasses.TableRowModel;
-import com.example.simplifiedsqlite.modelClasses.Types;
+import com.SimpleSqlite.modelClasses.TableRowModel;
+import com.SimpleSqlite.modelClasses.Types;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 
 public class Database extends SQLiteOpenHelper {
 
@@ -65,7 +63,7 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
 
     }
-    public void deleteTable(String tableName){
+    public void clearTable(String tableName){
         TABLE_NAME = tableName;
         try {
             SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
@@ -97,15 +95,36 @@ public class Database extends SQLiteOpenHelper {
 
         db.insert(tableName,null,cv);
     }
-    public HashMap getColumnWithId(String id,String tableName){
+    public HashMap getColumnWithId(String id, String tableName){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM LIST WHERE " + "ID" + " = " + id, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM "+tableName+" WHERE " + "ID" + " = " + id, null);
         cursor.moveToFirst();
         HashMap map = new HashMap();
         String[] columns = cursor.getColumnNames();
         for (int i = 0; i < columns.length; i++) {
-            map.put(columns[i],cursor.getColumnIndex(columns[i]));
+            map.put(columns[i],cursor.getString(cursor.getColumnIndex(columns[i])));
+            Log.e("TAG", "getColumnWithId: "+cursor.getString(cursor.getColumnIndex(columns[i])) );
         }
         return map;
+    }
+    public ArrayList<HashMap> queryAllItemsInTable(String tableName){
+        TABLE_NAME = tableName;
+
+        ArrayList<HashMap> arrayList = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor  cursor = db.rawQuery("select * from "+tableName,null);
+        String[] columns = cursor.getColumnNames();
+        int indexCount = cursor.getColumnCount();
+        for (int i = 1; i <= indexCount; i++) {
+            HashMap map = new HashMap();
+            for (int j = 0; j < columns.length; j++) {
+                map.put(columns[j],cursor.getString(j));
+            }
+           arrayList.add(map);
+        }
+
+        return arrayList;
     }
 }
