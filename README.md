@@ -128,3 +128,22 @@ Call this method to update column.
 The first parameter is table name, second is id, third one is row name and the last one is the update value
 
 	database.updateColumnWithId(TABLE_NAME,"id","ROW_NAME","UPDATE_VALUE");
+
+
+Update column with row name and it's value
+--------------------------------------------
+Create an object for SimplifiedDatabase
+
+	SimplifiedDatabase database = new SimplifiedDatabase(this,DATABASE_NAME);
+If your row is String type, use this code to update column
+
+First parameter is table name, second one is old value, third one is row name and the fourth one is new value 
+
+        database.updateStringValueColumnWithRowName(TABLE_NAME,"OLD VALUE","ROW NAME","NEW VALUE");
+	
+Else
+
+First parameter is table name, second one is old value, third one is row name and the fourth one is new value 
+
+
+	database.updateIntegerValueColumnWithRowName(TABLE_NAME,1,"ROW NAME",2);
