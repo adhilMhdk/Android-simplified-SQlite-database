@@ -95,13 +95,23 @@ Get column with Column id
 
 Create an object for SimplifiedDatabase
 
-	SimplifiedDatabase database= new SimplifiedDatabase(this,DATABASE_NAME);
+	SimplifiedDatabase database = new SimplifiedDatabase(this,DATABASE_NAME);
 Call this method with first parameter as id and second as table name
 
         HashMap map = database.getColumnWithId("1",TABLE_NAME);
 	String name = map.get("COLUMN_NAME").toString();
 
-	
-	
+Query all items in a table
+----------------------------
 
-    
+Create an object for SimplifiedDatabase
+
+	SimplifiedDatabase database = new SimplifiedDatabase(this,DATABASE_NAME);
+Call this method to query all data in table
+	
+	ArrayList<HashMap> map = database.queryAllItemsInTable(TABLE_NAME);
+	for (int i = 0; i < maps.size(); i++) {
+            HashMap map = maps.get(i);
+            Toast.makeText(this, map.get("COLUMN_NAME").toString(), Toast.LENGTH_SHORT).show();
+	    Toast.makeText(this, map.get("COLUMN_NAME_B").toString(), Toast.LENGTH_SHORT).show();
+        }
