@@ -38,7 +38,7 @@ public class SimplifiedDatabase extends SQLiteOpenHelper {
         TABLE_NAME = tableName;
         try {
             SQLiteDatabase db =this.getWritableDatabase();
-            StringBuilder createTable = new StringBuilder("create table " + tableName + "(ID INTEGER PRIMARY KEY, name TEXT");
+            StringBuilder createTable = new StringBuilder("create table " + tableName + "(ID INTEGER PRIMARY KEY,)");
             createTable = new StringBuilder(createTable.toString().replace(",)", ""));
 
 
