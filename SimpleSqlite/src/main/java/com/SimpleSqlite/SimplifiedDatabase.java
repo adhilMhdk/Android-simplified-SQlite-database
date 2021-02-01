@@ -54,7 +54,7 @@ public class SimplifiedDatabase extends SQLiteOpenHelper {
 
             db.execSQL(createTable.toString());
         }catch (Exception e){
-
+            e.printStackTrace();
         }
     }
 
@@ -70,7 +70,7 @@ public class SimplifiedDatabase extends SQLiteOpenHelper {
             String deleteTable= "DELETE FROM "+tableName;
             sqLiteDatabase.execSQL(deleteTable);
         }catch (Exception e){
-            Log.e("Simplified SQlite", "deleteTable: ",e);
+            e.printStackTrace();
         }
     }
 
@@ -89,7 +89,7 @@ public class SimplifiedDatabase extends SQLiteOpenHelper {
                     cv.put(models.get(i).getName(), models.get(i).getStringValue());
                 }
             }catch (Exception e) {
-                Log.e("SQlite database", "insertData: ", e);
+                e.printStackTrace();
             }
         }
 
@@ -175,6 +175,7 @@ public class SimplifiedDatabase extends SQLiteOpenHelper {
                 }
             }
         }catch (Exception e){
+            e.printStackTrace();
             return position;
         }
 
